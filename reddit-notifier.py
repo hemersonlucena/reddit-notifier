@@ -32,12 +32,19 @@ def request_toast(title, desc):
 
 def run_bot():
     subreddit = reddit.subreddit(SUBREDDIT)
-    for submission in subreddit.stream.submissions():
-        if submission.id not in cache:
-            print(str(submission.subreddit), "|", str(submission.title))
-            t1 = threading.Thread(target=request_toast, args=("New post on " + str(submission.subreddit), str(submission.title)))
-            t1.start()
-            cache.append(submission.id)
+    while True:
+        try:
+            for submission in subreddit.stream.submissions():
+                if submission.id not in cache:
+                    print(str(submission.subreddit), "|", str(submission.title))
+                    t1 = threading.Thread(target=request_toast, args=("New post on " + str(submission.subreddit), str(submission.title)))
+                    t1.start()
+                    cache.append(submission.id)
+        except:
+            print("Error while retrieving data")
+            pass
+        
+        time.sleep(5)
 
 
 run_bot()
