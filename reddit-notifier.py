@@ -1,20 +1,16 @@
-from configparser import ConfigParser
 import praw
 import time
 
+# SETTINGS ----------------------------------------------------
+USER_AGENT = "Passive bot by /u/hemersonlucena"
+CLIENT_ID = "INSERT YOUR CLIENT ID HERE!"
+CLIENT_SECRET = "INSERT YOUR CLIENT SECRET HERE!"
 
-if __name__ == "__main__":
-    cfg = ConfigParser()
-
-    cfg.read('config.ini')
-    USER_AGENT = cfg.get('auth', 'user_agent')
-    CLIENT_ID = cfg.get('auth', 'client_id')
-    CLIENT_SECRET = cfg.get('auth', 'client_secret')
-
-    SUBREDDIT = cfg.get('preferences', 'subreddit')
-    SLEEP_TIME = int(cfg.get('preferences', 'sleep_time'))
+SUBREDDIT = "AskReddit+AskScience+aww"
 
 
+
+# SETUP -------------------------------------------------------
 reddit = praw.Reddit(user_agent = USER_AGENT, client_id = CLIENT_ID, client_secret = CLIENT_SECRET)
 cache = []
 
